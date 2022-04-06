@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="pt-bt">
+<meta charset="utf-8"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+<head>
+    <meta charset="utf-8"/>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <img src="images/logo3.png" width="10%"/>
+
+        <!--        Menu sanfona-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse px-md-5" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre</a>
+                </li>
+            </ul>
+
+            <!--            Search-->
+            <form class="d-flex me-lg-3">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" style="border-radius: 100%" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </form>
+
+            <!--            Dropdown Perfil-->
+            <div class="dropdown dropstart">
+                <a class="btn link-dark dropdown-toggle" id="navbarScrollingDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white"
+                         class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd"
+                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+                </a>
+                <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarScrollingDropdown">
+                    <h4 class="mb-3 mt-2" align="center">Iniciar sessão</h4>
+                    <div class="dropdown-divider"></div>
+                    <form class="px-4 py-3">
+                        <div class="mb-3">
+                            <label for="email_dropdown" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email_dropdown"
+                                   placeholder="email@exemplo.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="senha_dropdown" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="senha_dropdown"
+                                   placeholder="*****">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    Lembrar senha
+                                </label>
+                            </div>
+                        </div>
+                        <input type="button" class="btn btn-primary" onclick="entrar()" value="Entrar">
+                    </form>
+                    <div>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="criaConta.html">Não possui uma conta? Cadastre-se</a>
+                        <a class="dropdown-item" href="resetSenha.html">Esqueci minha senha</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="col-md-12 col-lg-8 container clearfix">
+    <h2 class="mb-5 mt-5" style="text-align: center">Cadastro de cliente</h2>
+    <form id="cadastra_cliente" class="needs-validation" method="post" novalidate>
+        <div class="row g-3">
+            <div class="col-sm-6">
+                <label for="usu_nome" class="form-label">* Nome</label>
+                <input type="text" class="form-control" id="usu_nome" placeholder="" value="" required="true">
+                <div class="invalid-feedback">
+                    É obrigatório inserir o nome.
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="usu_sobrenome" class="form-label">* Sobrenome</label>
+                <input type="text" class="form-control" id="usu_sobrenome" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                    É obrigatório inserir o sobrenome.
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label class="form-label">* CPF</label>
+                <input type="text" class="form-control" id="usu_cpf" name="cpf" maxlength="14"
+                       onkeypress="formatar('###.###.###-##', this);" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
+                       required>
+                <div class="invalid-feedback">
+                    Insira um CPF.
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label for="dtNascimento" class="form-label">* Data de Nascimento</label>
+                <input type="date" class="form-control" id="dtNascimento" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                    É obrigatório inserir a data de nascimento.
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label>* Gênero</label>
+                <div>
+                    <div class="form-check form-check-inline mt-3">
+                        <input class="form-check-input" type="radio" name="radio-stacked" id="usu_masc" value="option1"
+                               required>
+                        <label class="form-check-label" for="usu_masc">
+                            Masculino
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio-stacked" id="usu_fem" value="option2">
+                        <label class="form-check-label" for="usu_fem">
+                            Feminino
+                        </label>
+                        <div class="invalid-feedback">Selecione o gênero</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <label for="dtNascimento" class="form-label">* Telefone</label>
+                <div class="input-group">
+                    <div class="col-2">
+                        <select class="form-select" id="usu_telefone"
+                                aria-label="Example select with button addon" required>
+                            <option value="">Escolha...</option>
+                            <option value="1">Residencial</option>
+                            <option value="2">Celular</option>
+                            <option value="3">Comercial</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Selecione o tipo do telefone
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <input type="text" class="form-control" placeholder="XX" aria-invalid="Digite o DDD"
+                               maxlength="2" pattern="[0-9]{2}" required>
+                        <div class="invalid-feedback">
+                            Digite o DDD com 2 digitos
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control" placeholder="Digite o número do telefone" maxlength="10"
+                               onkeypress="formatar('####-#####', this);" pattern="[0-9]{4}-[0-9]{4}||[0-9]{4}-[0-9]{5}"
+                               required>
+                        <div class="invalid-feedback">
+                            Digite o número de telefone
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="username" class="form-label">Tag instagram</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">@</span>
+                    <input type="text" class="form-control" id="username" placeholder="ID">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" placeholder="seu_email@exemplo.com"
+                       pattern="\w+@\w+\.\w.*" required="">
+                <div class="invalid-feedback">
+                    Insira um e-mail válido para autorização de envio (ex. ____@____.com)
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="usu_senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="usu_senha" placeholder="*****"
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z$*&@#]{8,}" required="">
+                <div class="invalid-feedback">
+                    A senha deve conter ao menos 8 caracteres, uma letra maiúscula, uma letra minúscula e um digito.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="confirma_senha" class="form-label"> Confirme sua senha</label>
+                <input type="password" class="form-control" id="confirma_senha" placeholder="*****"
+                       data-match="#usu_senha" data-match-error="Atenção! As senhas não estão iguais." required>
+                <div class="invalid-feedback">
+                    As senhas devem coincidir
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h4>Endereço de cobrança</h4>
+        <div class="col-12 mt-3">
+            <label for="address" class="form-label">Endereço</label>
+            <input type="text" class="form-control" id="address" placeholder="Rua, Avenida, etc..." required="">
+            <div class="invalid-feedback">
+                Insira o endereço para entrega.
+            </div>
+        </div>
+
+        <div class="col-12 mt-3">
+            <label for="address2" class="form-label">Complemento<span class="text-muted">(Opcional)</span></label>
+            <input type="text" class="form-control" id="address2" placeholder="Apartamento, bloco, etc...">
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <label for="country" class="form-label">País</label>
+                <select class="form-select" id="country" required="">
+                    <option value="">Selecione...</option>
+                    <option>Brasil</option>
+                </select>
+                <div class="invalid-feedback">
+                    Selecione um país válido.
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label for="state" class="form-label">Estado</label>
+                <select class="form-select" id="state" required="">
+                    <option value="">Selecione...</option>
+                    <option>São Paulo</option>
+                    <option>Rio de Janeiro</option>
+                    <option>Brasilia</option>
+                </select>
+                <div class="invalid-feedback">
+                    Selecione um estado válido.
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label for="zip" class="form-label">CEP</label>
+                <input type="text" class="form-control" id="zip" placeholder="00000-000" maxlength="9"
+                       onkeypress="formatar('#####-###', this);" pattern="[0-9]{5}-[0-9]{3}"
+                       required>
+                <div class="invalid-feedback">
+                    Insira um CEP válido. <br/>(ex. 12345-678)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-check form-switch mt-3">
+            <input class="form-check-input" type="checkbox" value="" id="end_cobranca">
+            <label class="form-check-label" for="end_cobranca">
+                Este endereço será usado para entregas.
+            </label>
+        </div>
+
+        <hr class="my-4">
+
+        <button class="w-100 btn btn-primary btn-lg" type="submit" value="Submit" onclick="salvaCliente()">Cadastrar
+        </button>
+    </form>
+</div>
+</body>
+
+<!--Valida senhas iguais-->
+<script>
+    var password = document.getElementById("usu_senha")
+    var confirm_password = document.getElementById("confirma_senha");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Senhas diferentes!");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
+
+<!--Valida geral-->
+<!--<script>-->
+<!--    (function () {-->
+<!--        'use strict'-->
+<!--        var forms = document.querySelectorAll('.needs-validation')-->
+
+<!--        Array.prototype.slice.call(forms)-->
+<!--            .forEach(function (form) {-->
+<!--                form.addEventListener('submit', function (event) {-->
+<!--                    if (!form.checkValidity()) {-->
+<!--                        event.preventDefault()-->
+<!--                        event.stopPropagation()-->
+<!--                    }-->
+
+<!--                    form.classList.add('was-validated')-->
+<!--                }, false)-->
+<!--            })-->
+<!--    })()-->
+<!--</script>-->
+
+<!--Login-->
+<script>
+    function entrar() {
+        var email = document.getElementById('email_dropdown').value
+        var senha = document.getElementById('senha_dropdown').value
+        if (email !== "" && senha !== "") {
+            window.location.href = 'indexLogado.html'
+        } else if (senha !== "") {
+            alert("Insira um e-mail")
+        } else if (email !== "") {
+            alert("Insira uma senha")
+        } else {
+            alert("Insira suas credenciais")
+        }
+    }
+</script>
+
+<!--Bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous">
+</script>
+
+<!--mascara - CPF-->
+<script>  function formatar(mascara, documento) {
+    var i = documento.value.length;
+    var saida = mascara.substring(0, 1);
+    var texto = mascara.substring(i)
+    if (texto.substring(0, 1) !== saida) {
+        documento.value += texto.substring(0, 1);
+    }
+}
+</script>
+
+<script>
+    function salvaCliente() {
+
+        var texto = "{nome:" + document.getElementById("usu_nome").value +
+            ",cpf:" + document.getElementById("usu_cpf").value +
+            ",email:" + document.getElementById("email").value +
+            "}"
+
+        var json = JSON.stringify(texto)
+
+
+        alert(json)
+        fetch('http://localhost:8080/clientes', {
+            method: 'POST',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            body: json
+        }).then(response => {
+            if (!response.ok)
+                throw new Error("Não foi possível completar o cadastro");
+
+            return response.text();
+        }).then(data => alert(data));
+    }
+</script>
+
+<script>
+    function replacer(key, value) {
+        if (typeof value === "string") {
+            return undefined;
+        }
+        return value;
+    }
+</script>
+
+</html>
